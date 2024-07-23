@@ -5,11 +5,11 @@ const port = 8080;
 app.use(express.json());
 
 let tasks = [
-  { id: 1, task: "do your homework" },
-  { id: 2, task: "brush your teeth" },
-  { id: 3, task: "take a shower" },
-  { id: 4, task: "eat breakfast" },
-  { id: 5, task: "watch a movie" },
+  { id: 1, task: "do your homework", completed: false },
+  { id: 2, task: "brush your teeth", completed: false },
+  { id: 3, task: "take a shower", completed: false },
+  { id: 4, task: "eat breakfast", completed: false },
+  { id: 5, task: "watch a movie", completed: false },
 ];
 
 // Endpoint to get all tasks
