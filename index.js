@@ -31,7 +31,7 @@ app.get("/task/:id", (req, res) => {
 app.post("/tasks", (req, res) => {
   const { task } = req.body;
   if (task) {
-    const newTask = { id: tasks.length + 1, task };
+    const newTask = { id: tasks.length + 1, task, completed: false };
     tasks.push(newTask);
     res.status(201).json(newTask);
   } else {
@@ -46,6 +46,20 @@ app.delete("/task/:id", (req, res) => {
   if (taskIndex !== -1) {
     tasks.splice(taskIndex, 1);
     res.status(200).send(`Task with id ${taskId} deleted`);
+  } else {
+    res.status(404).send("Task not found");
+  }
+});
+
+// Endpoint to update a specific task using id
+app.put("/task/:id", (req, res) => {
+  const taskId = parseInt(req.params.id);
+  const { task, completed } = req.body;
+  const taskIndex = tasks.findIndex((t) => t.id === taskId);
+  if (taskIndex !== -1) {
+    if (task !== undefined) tasks[taskIndex].task = task;
+    if (completed !== undefined) tasks[taskIndex].completed = completed;
+    res.status(200).json(tasks[taskIndex]);
   } else {
     res.status(404).send("Task not found");
   }
